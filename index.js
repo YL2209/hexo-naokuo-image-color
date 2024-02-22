@@ -3,13 +3,12 @@
 const { getColorFromURL } = require('./src/color-thief');
 
 hexo.extend.filter.register('before_post_render', async function (data) {
-  const { cover } = data;
-
-  if (!cover) return;
+  // 存在自定义文章主色调 或 没有文章封面时跳出
+  if (!data.cover || data.main_color) return;
 
   try {
     // 获取文章封面图片路径
-    const imageUrl = cover;
+    const imageUrl = data.cover;
     // 异步获取图片主色调
     const dominantColor = await getColorFromURL(imageUrl);
     // 将颜色转换为HEX格式
