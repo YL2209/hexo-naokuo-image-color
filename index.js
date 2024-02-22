@@ -22,7 +22,7 @@ hexo.extend.filter.register('before_post_render', async function (data) {
       adjustedColor = LightenDarkenColor(ImgColorHex, -40);
     }
     // 将主题色添加到文章数据中
-    console.log(data.title + '主色调：' + adjustedColor);
+    // hexo.log.info('文章主色调：' + data.title + '主色调：' + adjustedColor);
     data.main_color = adjustedColor;
   } catch (error) {
     console.error(`从图像中提取主题颜色时出错: ${error}`);
