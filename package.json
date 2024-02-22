@@ -1,0 +1,21 @@
+{
+  "name": "hexo-naokuo-image-color",
+  "version": "1.0.0",
+  "description": "A Hexo plugin to extract theme color from cover images using color-thief",
+  "main": "index.js",
+  "keywords": [
+    "hexo",
+    "plugin",
+    "theme-color",
+    "color-thief"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YL2209/hexo-theme-color-extractor.git"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.44"
+  },
+  "author": "Naokuo",
+  "license": "MIT"
+}
