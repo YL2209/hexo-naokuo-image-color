@@ -1,6 +1,6 @@
 {
   "name": "hexo-naokuo-image-color",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Hexo plugin to extract theme color from cover images using color-thief",
   "main": "index.js",
   "keywords": [
