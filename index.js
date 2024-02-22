@@ -3,8 +3,10 @@
 const { getColorFromURL } = require('./src/color-thief');
 
 hexo.extend.filter.register('before_post_render', async function (data) {
-  // 存在自定义文章主色调 或 没有文章封面时跳出
-  if (!data.cover || data.main_color) return;
+  const config = hexo.config.mainTone || hexo.theme.config.mainTone
+
+  // 存在自定义文章主色调 或 没有文章封面 或 配置没有开启时跳出
+  if (!data.cover || data.main_color || !(config && config.enable)) return;
 
   try {
     // 获取文章封面图片路径
@@ -20,7 +22,7 @@ hexo.extend.filter.register('before_post_render', async function (data) {
       adjustedColor = LightenDarkenColor(ImgColorHex, -40);
     }
     // 将主题色添加到文章数据中
-    // console.log(adjustedColor);
+    console.log(data.title + '主色调：' + adjustedColor);
     data.main_color = adjustedColor;
   } catch (error) {
     console.error(`从图像中提取主题颜色时出错: ${error}`);
