@@ -18,6 +18,13 @@ mainTone:
   api: # mode为api时可填写
   cover_change: true # 整篇文章跟随cover修改主色调
 ```
+- `_config.anzhiyu.yml` 或 `_config.yml`
+
+```YAML
+imageColor:
+  enable: true # true or false 文章是否启用获取图片主色调
+  # log: false
+```
  
 ### 引用库
 

@@ -2,12 +2,15 @@
 
 const { getColorFromURL } = require('./src/color-thief');
 const logger = require('hexo-log').default();
+const fs = require('hexo-fs');
+const frontMatter = require('hexo-front-matter');
 
 hexo.extend.filter.register('before_post_render', async function (data) {
-  const config = hexo.config.mainTone || hexo.theme.config.mainTone
+  const config = hexo.config.imageColor || hexo.theme.config.imageColor
+  const postColor = data.main_color;
 
   // 存在自定义文章主色调 或 没有文章封面 或 配置没有开启时跳出
-  if (!data.cover || data.main_color || !(config && config.enable)) return;
+  if (!data.cover || !(config && config.enable)) return;
 
   try {
     // 获取文章封面图片路径
@@ -22,12 +25,31 @@ hexo.extend.filter.register('before_post_render', async function (data) {
     if (getContrastYIQ(ImgColorHex) === "light") {
       adjustedColor = LightenDarkenColor(ImgColorHex, -40);
     }
+    // 新获取的颜色和原来相同时跳出
+    if (adjustedColor === postColor) return;
+
     // 默认输出日志信息
     if (!(config && config.log === false)) {
       logger.info(`文章《${data.title}》的主色调：${adjustedColor}`);
     }
     // 将主题色添加到文章数据中    
     data.main_color = adjustedColor;
+
+    // 只有在处理.md文件时更新Front Matter和源文件
+    if (/\.md$/.test(data.source)) {
+      // 解析原始Front Matter
+      const parsedPost = frontMatter.parse(data.raw);
+
+      // 添加新的主色调属性
+      parsedPost.main_color = adjustedColor;
+
+      // 重新生成包含新主色调的Front Matter的Markdown内容
+      const processedPostStr = frontMatter.stringify(parsedPost);
+      const updatedContent = '---\n' + processedPostStr;
+
+      // 更新源文件
+      await fs.writeFile(data.full_source, updatedContent, 'utf-8');
+    }
   } catch (error) {
     logger.error(`提取文章《${data.title}》封面图像的主题颜色时出错: ${error}`);
   }
