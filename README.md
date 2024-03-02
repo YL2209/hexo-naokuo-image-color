@@ -3,7 +3,7 @@
 ### 安装
 
 ```bash
-npm i hexo-naokuo-image-color --save
+npm i hexo-naokuo-image-color@beta --save
 ```
 
 ### 用法
@@ -22,12 +22,11 @@ mainTone:
 
 ```YAML
 imageColor:
-  enable: true # true or false 文章是否启用获取图片主色调
-  # log: false
+  enable: true
+  api_url: https://img2color-go.vercel.app/api?img= # 主色调提取API接口链接，项目：https://github.com/yife68/img2color-go
+  # log: false # 是否开启日志，默认打开
 ```
  
-### 引用库
+### 引用
 
-- [color-thief-node](https://github.com/zicodeng/color-thief-node)
-- [@napi-rs/canvas](https://github.com/Brooooooklyn/canvas)
 - 部分代码来自[hexo-theme-anzhiyu](https://github.com/anzhiyu-c/hexo-theme-anzhiyu)

@@ -21,7 +21,7 @@ hexo.extend.filter.register('before_post_render', async function (Posts) {
     let adjustedColor;
 
     // 发起一个 GET 请求
-    await fetch(dominantColor)
+    await node_fetch(dominantColor)
       .then(response => {
         // 检查响应状态码是否正常
         if (!response.ok) return;

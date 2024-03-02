@@ -14,13 +14,16 @@
     "url": "https://github.com/YL2209/hexo-theme-color-extractor.git"
   },
   "devDependencies": {
-    "hexo": "7.0.0"
+    "@types/node": "^20.4.7",
+    "hexo": "7.0.0",
+    "@types/node-fetch": "^2.6.4"
   },
   "dependencies": {
     "@napi-rs/canvas": "^0.1.49",
     "hexo-log": "^4.0.1",
     "hexo-fs": "^4.1.1",
-    "hexo-front-matter": "^4.2.1"
+    "hexo-front-matter": "^4.2.1",
+    "node-fetch": "^2.6.12"
   },
   "author": "Naokuo",
   "license": "MIT"
